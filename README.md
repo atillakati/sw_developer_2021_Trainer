@@ -28,4 +28,4 @@ Console.WriteLine();
 Console.ReadLine();
 ```
 
-![Comic](https://github.com/atillakati/sw_developer_2021_Trainer/blob/main/docs/CC_Prinzipien.jpg)
+![Comic](https://github.com/atillakati/sw_developer_2021_Trainer/blob/main/docs/CC_Prinzipien.JPG)
