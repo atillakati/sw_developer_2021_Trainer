@@ -17,6 +17,12 @@ namespace Operatoren_GL
             int z2 = 0;
             int z3 = 0;
 
+            double radius = 15.321;
+            double umfangKreis = 0.0;
+            
+            umfangKreis = 2 * radius * Math.PI;
+
+
             //z3 = z1 + 654.22;
 
             //vergleichs-Operatoren
