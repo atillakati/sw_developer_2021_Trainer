@@ -35,6 +35,21 @@ namespace Operatoren_GL
             // & |  && || !
 
             //zusammengesetzte Operatoren
+            int einZahl = 5;
+
+            einZahl = einZahl + 5;
+            einZahl += 5;
+            einZahl -= 8;
+            einZahl *= 2;
+            einZahl /= 3;
+
+            einZahl += 1;
+
+            //inkrementieren
+            einZahl++;
+            //dekrementieren
+            einZahl--;
+
 
         }
     }
