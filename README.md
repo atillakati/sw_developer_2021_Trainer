@@ -3,7 +3,7 @@
 
 Dies ist **ein fetter** Text. Dies ist *ein kursiver* Text.
 
-Syntax für BilderLink im github:
+Syntax fÃ¼r BilderLink im github:
 ```HTML
 https://github.com/[UserName]/[RepositoryName]/blob/main/
 ```
@@ -29,3 +29,4 @@ Console.ReadLine();
 ```
 
 ![Comic](https://github.com/atillakati/sw_developer_2021_Trainer/blob/main/docs/CC_Prinzipien.JPG)
+[Docker Video Tutorial Series](https://www.youtube.com/watch?v=jPdIRX6q4jA)
