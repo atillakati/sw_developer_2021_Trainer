@@ -32,5 +32,83 @@ namespace Wifi.ConsoleTools
             Console.ForegroundColor = oldColor;
         }
 
+
+        /// <summary>
+        /// Prints a centered header text with borders to the console
+        /// with default border charakter = # and clearscreen first = true
+        /// </summary>
+        /// <param name="headerText">Header text to display centered on console</param>
+        public static void PrintHeader(string headerText)
+        {
+            PrintHeader(headerText, '#', true);
+        }
+
+        public static int GetInt(string inputPrompt)
+        {
+            bool inputIsValid = false;
+            int inputValue = 0;
+
+            do
+            {
+                Console.Write(inputPrompt);
+                try
+                {
+                    inputValue = int.Parse(Console.ReadLine());
+                    inputIsValid = true;
+                }
+                catch
+                {
+                    inputIsValid = false;
+                }                
+            }
+            while (!inputIsValid);
+
+            return inputValue;
+        }
+
+        public static decimal GetDecimal(string inputPrompt)
+        {
+            bool inputIsValid = false;
+            decimal inputValue = 0.0m;
+
+            do
+            {
+                Console.Write(inputPrompt);
+                try
+                {
+                    inputValue = decimal.Parse(Console.ReadLine());
+                    inputIsValid = true;
+                }
+                catch
+                {
+                    inputIsValid = false;
+                }
+            }
+            while (!inputIsValid);
+
+            return inputValue;
+        }
+
+        /// <summary>
+        /// Prints a centered header text with borders to the console
+        /// </summary>
+        /// <param name="headerText">Header text to display centered on console</param>
+        /// <param name="borderChar">The charakter to draw the borders</param>
+        /// <param name="clearScreenFirst">True, if the screen should be cleared first, else false</param>
+        public static void PrintHeader(string headerText, char borderChar, bool clearScreenFirst)
+        {
+            int xPos = 0;
+
+            if (clearScreenFirst)
+            {
+                Console.Clear();
+            }
+
+            Console.WriteLine(new string(borderChar, Console.WindowWidth - 1));
+            xPos = Console.WindowWidth / 2 - headerText.Length / 2;
+            Console.CursorLeft = xPos;
+            Console.WriteLine(headerText);
+            Console.WriteLine(new string(borderChar, Console.WindowWidth - 1));
+        }
     }
 }

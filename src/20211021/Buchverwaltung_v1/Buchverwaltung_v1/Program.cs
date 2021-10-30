@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wifi.ConsoleTools;
 
 namespace Buchverwaltung_v1
 {
@@ -34,6 +36,91 @@ namespace Buchverwaltung_v1
              *  [Optional]
              *  5. Alle gespeicherten Bücher sollen eingelesen und dargestellt werden.
              *  */
+
+            string titel = string.Empty;
+            string autor = string.Empty;
+            int erscheinungsJahr = 0;
+            string iban = string.Empty;
+            decimal preis = 0.0m;
+            string dataline = string.Empty;
+            string filename = string.Empty;
+
+            do
+            {
+                UIHelper.PrintHeader("Buchverwaltung v1.0");
+                Console.WriteLine("\nBitte geben Sie nun die Buchdaten ein: ");
+
+                Console.Write("\tTitel: ");
+                titel = Console.ReadLine();
+
+                Console.Write("\tAutor: ");
+                autor = Console.ReadLine();
+
+                Console.Write("\tIBAN:  ");
+                iban = Console.ReadLine();
+
+                erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
+                preis = UIHelper.GetDecimal("\tPreis (in Euro): ");
+
+                dataline = CreateDataLine(titel, autor, erscheinungsJahr, iban, preis);
+
+                filename = CreateFileName(titel);
+                WriteDataToFile(dataline, filename);
+                Console.WriteLine($"Daten wurden in die Datei '{filename}' geschrieben.");
+            }
+            while (CheckForFurtherBooks());
+        }
+
+        private static bool CheckForFurtherBooks()
+        {
+            ConsoleKeyInfo keyInfo;
+            bool inputIsValid = false;
+
+            do
+            {
+                Console.Write("Wollen Sie Buchdaten eines weiteren Buches eingeben (j/n): ");
+                keyInfo = Console.ReadKey(false);
+
+                if (keyInfo.Key == ConsoleKey.J || keyInfo.Key == ConsoleKey.N)
+                {
+                    inputIsValid = true;
+                }
+                else
+                {
+                    inputIsValid = false;
+                }
+            }
+            while (!inputIsValid);
+
+            return keyInfo.Key == ConsoleKey.J;            
+        }
+
+        static string CreateDataLine(string titel, string autor, int erscheinungsJahr, string iban, decimal preis)
+        {
+            return $"{titel};{autor};{iban};{erscheinungsJahr};{preis}";
+        }
+
+        static string CreateFileName(string titel)
+        {
+            string filename = Path.Combine(titel, ".book");
+            filename = filename.Trim();
+
+            return filename;
+        }
+
+        static void WriteDataToFile(string dataline, string filename)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(filename, false))
+                {
+                    sw.WriteLine(dataline);
+                }
+            }
+            catch
+            {
+                UIHelper.PrintColoredMessage($"ERROR: Leider konnten die Daten nicht geschrieben werden: '{filename}'");
+            }
         }
     }
 }
