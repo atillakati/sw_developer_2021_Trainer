@@ -50,15 +50,9 @@ namespace Buchverwaltung_v1
                 UIHelper.PrintHeader("Buchverwaltung v1.0");
                 Console.WriteLine("\nBitte geben Sie nun die Buchdaten ein: ");
 
-                Console.Write("\tTitel: ");
-                titel = Console.ReadLine();
-
-                Console.Write("\tAutor: ");
-                autor = Console.ReadLine();
-
-                Console.Write("\tIBAN:  ");
-                iban = Console.ReadLine();
-
+                titel  = UIHelper.GetString("\tTitel: ");
+                autor =  UIHelper.GetString("\tAutor: ");
+                iban =   UIHelper.GetString("\tIBAN:  ");
                 erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
                 preis = UIHelper.GetDecimal("\tPreis (in Euro): ");
 
@@ -69,6 +63,8 @@ namespace Buchverwaltung_v1
                 Console.WriteLine($"Daten wurden in die Datei '{filename}' geschrieben.");
             }
             while (CheckForFurtherBooks());
+
+            Console.WriteLine();
         }
 
         private static bool CheckForFurtherBooks()
@@ -101,9 +97,10 @@ namespace Buchverwaltung_v1
         }
 
         static string CreateFileName(string titel)
-        {
-            string filename = Path.Combine(titel, ".book");
+        {                        
+            string filename = titel + ".book";
             filename = filename.Trim();
+            filename = filename.Replace(" ", string.Empty);
 
             return filename;
         }

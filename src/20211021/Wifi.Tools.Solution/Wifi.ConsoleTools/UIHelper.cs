@@ -59,7 +59,24 @@ namespace Wifi.ConsoleTools
                 catch
                 {
                     inputIsValid = false;
-                }                
+                }
+            }
+            while (!inputIsValid);
+
+            return inputValue;
+        }
+
+        public static string GetString(string inputPrompt)
+        {
+            bool inputIsValid = false;
+            string inputValue = string.Empty;
+
+            do
+            {
+                Console.Write(inputPrompt);
+
+                inputValue = Console.ReadLine();
+                inputIsValid = !string.IsNullOrEmpty(inputValue);
             }
             while (!inputIsValid);
 
