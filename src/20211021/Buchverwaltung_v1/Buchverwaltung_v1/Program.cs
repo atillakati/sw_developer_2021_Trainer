@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Wifi.ConsoleTools;
@@ -48,9 +49,13 @@ namespace Buchverwaltung_v1
             do
             {
                 UIHelper.PrintHeader("Buchverwaltung v1.0");
-                Console.WriteLine("\nBitte geben Sie nun die Buchdaten ein: ");
+                Console.WriteLine("\nBitte geben Sie nun die Buchdaten ein(E für ENDE): ");
 
                 titel  = UIHelper.GetString("\tTitel: ");
+                if (titel == "E")
+                {
+                    break;
+                }
                 autor =  UIHelper.GetString("\tAutor: ");
                 iban =   UIHelper.GetString("\tIBAN:  ");
                 erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
@@ -64,7 +69,55 @@ namespace Buchverwaltung_v1
             }
             while (CheckForFurtherBooks());
 
-            Console.WriteLine();
+            ReadAndDisplayFoundBookData();
+        }
+
+        private static void ReadAndDisplayFoundBookData()
+        {
+            string basePath = Assembly.GetEntryAssembly().Location;
+            basePath = Path.GetDirectoryName(basePath);
+
+            UIHelper.PrintHeader("Buchverwaltung v1.0");
+
+            foreach (string bookFileName in Directory.GetFiles(basePath, "*.book"))
+            {
+                using(StreamReader sr = new StreamReader(bookFileName))
+                {
+                    if (sr.EndOfStream)
+                    {
+                        continue;
+                    }
+                    
+                    DisplayBookData(sr.ReadLine());
+                }
+            }
+        }
+
+        private static void DisplayBookData(string dataLine)
+        {
+            string[] parts;
+            string titel = string.Empty;
+            string autor = string.Empty;
+            int erscheinungsJahr = 0;
+            string iban = string.Empty;
+            decimal preis = 0.0m;
+
+            parts = dataLine.Split(new char[] { ';' });
+
+            titel = parts[0];
+            autor = parts[1];
+            iban = parts[2];
+            erscheinungsJahr = int.Parse(parts[3]);
+            preis = decimal.Parse(parts[4]);
+
+            UIHelper.PrintColoredMessage(titel, ConsoleColor.Yellow);            
+            Console.Write($"({erscheinungsJahr})");
+            Console.CursorLeft = 35;
+            Console.Write($"     {autor}");
+            Console.CursorLeft = 55;
+            Console.Write($"     {iban}");
+            Console.CursorLeft = 75;
+            Console.WriteLine($"     EUR {preis:f2}");
         }
 
         private static bool CheckForFurtherBooks()
