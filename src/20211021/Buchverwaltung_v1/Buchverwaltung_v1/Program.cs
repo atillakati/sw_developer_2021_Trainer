@@ -72,7 +72,7 @@ namespace Buchverwaltung_v1
             ReadAndDisplayFoundBookData();
         }
 
-        private static void ReadAndDisplayFoundBookData()
+        static void ReadAndDisplayFoundBookData()
         {
             string basePath = Assembly.GetEntryAssembly().Location;
             basePath = Path.GetDirectoryName(basePath);
@@ -93,7 +93,7 @@ namespace Buchverwaltung_v1
             }
         }
 
-        private static void DisplayBookData(string dataLine)
+        static void DisplayBookData(string dataLine)
         {
             string[] parts;
             string titel = string.Empty;
@@ -120,7 +120,7 @@ namespace Buchverwaltung_v1
             Console.WriteLine($"     EUR {preis:f2}");
         }
 
-        private static bool CheckForFurtherBooks()
+        static bool CheckForFurtherBooks()
         {
             ConsoleKeyInfo keyInfo;
             bool inputIsValid = false;
