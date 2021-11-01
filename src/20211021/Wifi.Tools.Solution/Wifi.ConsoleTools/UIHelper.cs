@@ -126,6 +126,6 @@ namespace Wifi.ConsoleTools
             Console.CursorLeft = xPos;
             Console.WriteLine(headerText);
             Console.WriteLine(new string(borderChar, Console.WindowWidth - 1));
-        }
+        }        
     }
 }

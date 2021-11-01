@@ -58,7 +58,7 @@ namespace Buchverwaltung_v1
                     break;
                 }
                 autor =  UIHelper.GetString("\tAutor: ");
-                isbn =   UIHelper.GetString("\tISBN:  ");
+                isbn = GetIsbn_10("\tISBN:  ");
                 erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
                 preis = UIHelper.GetDecimal("\tPreis (in Euro): ");
 
@@ -78,6 +78,22 @@ namespace Buchverwaltung_v1
 
             //existierende Buchdaten einlesen und darstellen
             ReadAndDisplayFoundBookData();
+        }
+
+
+        static string GetIsbn_10(string inputPrompt)
+        {
+            bool inputIsValid = false;
+            string inputValue = string.Empty;
+
+            do
+            {
+                inputValue = UIHelper.GetString(inputPrompt);
+                inputIsValid = IsbnValidator.TryValidate(inputValue);
+            }
+            while (!inputIsValid);
+
+            return inputValue;
         }
 
         static void ReadAndDisplayFoundBookData()
