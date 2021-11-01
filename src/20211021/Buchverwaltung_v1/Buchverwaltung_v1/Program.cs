@@ -20,7 +20,7 @@ namespace Buchverwaltung_v1
              *  - Titel
              *  - Autor
              *  - Erscheinungsjahr
-             *  - IBAN
+             *  - ISBN
              *  - Preis
              *  
              *  Dabei gilt:
@@ -41,7 +41,7 @@ namespace Buchverwaltung_v1
             string titel = string.Empty;
             string autor = string.Empty;
             int erscheinungsJahr = 0;
-            string iban = string.Empty;
+            string isbn = string.Empty;
             decimal preis = 0.0m;
             string dataline = string.Empty;
             string filename = string.Empty;
@@ -58,12 +58,12 @@ namespace Buchverwaltung_v1
                     break;
                 }
                 autor =  UIHelper.GetString("\tAutor: ");
-                iban =   UIHelper.GetString("\tIBAN:  ");
+                isbn =   UIHelper.GetString("\tISBN:  ");
                 erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
                 preis = UIHelper.GetDecimal("\tPreis (in Euro): ");
 
                 //Datensatz string aus Buchdaten erzeugen
-                dataline = CreateDataLine(titel, autor, erscheinungsJahr, iban, preis);
+                dataline = CreateDataLine(titel, autor, erscheinungsJahr, isbn, preis);
 
                 //Dateiname erzeugen
                 filename = CreateFileName(titel);
@@ -107,14 +107,14 @@ namespace Buchverwaltung_v1
             string titel = string.Empty;
             string autor = string.Empty;
             int erscheinungsJahr = 0;
-            string iban = string.Empty;
+            string isbn = string.Empty;
             decimal preis = 0.0m;
 
             parts = dataLine.Split(new char[] { ';' });
 
             titel = parts[0];
             autor = parts[1];
-            iban = parts[2];
+            isbn = parts[2];
             erscheinungsJahr = int.Parse(parts[3]);
             preis = decimal.Parse(parts[4]);
 
@@ -123,7 +123,7 @@ namespace Buchverwaltung_v1
             Console.CursorLeft = 35;
             Console.Write($"     {autor}");
             Console.CursorLeft = 55;
-            Console.Write($"     {iban}");
+            Console.Write($"     {isbn}");
             Console.CursorLeft = 75;
             Console.WriteLine($"     EUR {preis:f2}");
         }
@@ -152,9 +152,9 @@ namespace Buchverwaltung_v1
             return keyInfo.Key == ConsoleKey.J;            
         }
 
-        static string CreateDataLine(string titel, string autor, int erscheinungsJahr, string iban, decimal preis)
+        static string CreateDataLine(string titel, string autor, int erscheinungsJahr, string isbn, decimal preis)
         {
-            return $"{titel};{autor};{iban};{erscheinungsJahr};{preis}";
+            return $"{titel};{autor};{isbn};{erscheinungsJahr};{preis}";
         }
 
         static string CreateFileName(string titel)
