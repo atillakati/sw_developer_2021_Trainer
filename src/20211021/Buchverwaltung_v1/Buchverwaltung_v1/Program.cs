@@ -51,6 +51,7 @@ namespace Buchverwaltung_v1
                 UIHelper.PrintHeader("Buchverwaltung v1.0");
                 Console.WriteLine("\nBitte geben Sie nun die Buchdaten ein(E für ENDE): ");
 
+                //Buchdaten einlesen inkl. E für Abbruch der Eingabe
                 titel  = UIHelper.GetString("\tTitel: ");
                 if (titel == "E")
                 {
@@ -61,14 +62,21 @@ namespace Buchverwaltung_v1
                 erscheinungsJahr = UIHelper.GetInt("\tErscheinungsjahr(yyyy): ");
                 preis = UIHelper.GetDecimal("\tPreis (in Euro): ");
 
+                //Datensatz string aus Buchdaten erzeugen
                 dataline = CreateDataLine(titel, autor, erscheinungsJahr, iban, preis);
 
+                //Dateiname erzeugen
                 filename = CreateFileName(titel);
+
+                //Buchdaten in eine Datei speichern
                 WriteDataToFile(dataline, filename);
                 Console.WriteLine($"Daten wurden in die Datei '{filename}' geschrieben.");
+
+                //check: sollen weitere Buchdaten erfasst werden? = Abbruchbedingung
             }
             while (CheckForFurtherBooks());
 
+            //existierende Buchdaten einlesen und darstellen
             ReadAndDisplayFoundBookData();
         }
 
