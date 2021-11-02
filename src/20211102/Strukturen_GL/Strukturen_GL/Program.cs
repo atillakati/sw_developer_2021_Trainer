@@ -35,6 +35,8 @@ namespace Strukturen_GL
             myBook = ReadBookData();
 
             Console.WriteLine(myBook);
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();            
         }
 
         static void DisplayBook(Book bookToDisplay)
