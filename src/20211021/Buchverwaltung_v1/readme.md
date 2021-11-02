@@ -5,7 +5,7 @@ Die Applikation soll Buchdaten erfassen. Folgende Daten sollen dabei berücksich
  - Titel
  - Autor
  - Erscheinungsjahr
- - IBAN
+ - ISBN
  - Preis
 
  Dabei gilt:
@@ -20,4 +20,5 @@ Die Applikation soll Buchdaten erfassen. Folgende Daten sollen dabei berücksich
     Buch nach der Eingabe automatisch abgespeichert wird (als Datei).
       
 [!Optional]
+
 5. Alle gespeicherten Bücher sollen eingelesen und dargestellt werden.
