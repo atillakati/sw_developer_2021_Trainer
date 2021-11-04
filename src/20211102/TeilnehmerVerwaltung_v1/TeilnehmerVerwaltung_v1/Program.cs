@@ -13,22 +13,21 @@ namespace TeilnehmerVerwaltung_v1
             int count = 0;
             string[] listOfNames;
 
+            //Eingabe der Anzahl von Teilnehmern
             Console.Write("Bitte Anzahl der Teilnehmer eingeben: ");
             count = int.Parse(Console.ReadLine());
 
+            //Dimensionierung der Liste
             listOfNames = new string[count];
 
+            //Eingabe der Daten
             for (int i = 0; i < count; i++)
             {
                 Console.Write($"\tName Teilnehmer {i + 1}: ");
                 listOfNames[i] = Console.ReadLine();
             }
 
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine($"Teilnehmer {i + 1}: {listOfNames[i]}");
-            }
-
+            //Ausgabe der Daten
             foreach(string name in listOfNames)
             {               
                 Console.WriteLine(name);
