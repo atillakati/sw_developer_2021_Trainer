@@ -32,6 +32,29 @@ namespace Wifi.ConsoleTools
             Console.ForegroundColor = oldColor;
         }
 
+        public static DateTime GetDateTime(string inputPrompt)
+        {
+            bool inputIsValid = false;
+            DateTime inputValue = DateTime.MinValue;
+
+            do
+            {
+                Console.Write(inputPrompt);
+                try
+                {
+                    inputValue = DateTime.Parse(Console.ReadLine());
+                    inputIsValid = true;
+                }
+                catch
+                {
+                    inputIsValid = false;
+                }
+            }
+            while (!inputIsValid);
+
+            return inputValue;
+        }
+
 
         /// <summary>
         /// Prints a centered header text with borders to the console

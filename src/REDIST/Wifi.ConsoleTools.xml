@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wifi.ConsoleTools</name>
+    </assembly>
+    <members>
+        <member name="T:Wifi.ConsoleTools.IsbnValidator">
+            <summary>
+            Source: https://www.dreamincode.net/forums/topic/365698-Validating-ISBN10-and-ISBN13-codes/
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Wifi.ConsoleTools.IsbnValidator.TryValidate(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Wifi.ConsoleTools.IsbnValidator.IsValidIsbn10(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Wifi.ConsoleTools.IsbnValidator.IsValidIsbn13(System.String)" -->
+        <member name="M:Wifi.ConsoleTools.UIHelper.PrintColoredMessage(System.String)">
+            <summary>
+            Prints a red colored message with (no automatic newline) to default Output-Stream on the console.
+            </summary>
+            <param name="message">The message which should displayed</param>        
+        </member>
+        <member name="M:Wifi.ConsoleTools.UIHelper.PrintColoredMessage(System.String,System.ConsoleColor)">
+            <summary>
+            Prints a colored message with (no automatic newline) to default Output-Stream on the console.
+            </summary>
+            <param name="message">The message which should displayed</param>
+            <param name="messageColor">The color the provided message should be displayed in.</param>        
+        </member>
+        <member name="M:Wifi.ConsoleTools.UIHelper.PrintHeader(System.String)">
+            <summary>
+            Prints a centered header text with borders to the console
+            with default border charakter = # and clearscreen first = true
+            </summary>
+            <param name="headerText">Header text to display centered on console</param>
+        </member>
+        <member name="M:Wifi.ConsoleTools.UIHelper.PrintHeader(System.String,System.Char,System.Boolean)">
+            <summary>
+            Prints a centered header text with borders to the console
+            </summary>
+            <param name="headerText">Header text to display centered on console</param>
+            <param name="borderChar">The charakter to draw the borders</param>
+            <param name="clearScreenFirst">True, if the screen should be cleared first, else false</param>
+        </member>
+    </members>
+</doc>
