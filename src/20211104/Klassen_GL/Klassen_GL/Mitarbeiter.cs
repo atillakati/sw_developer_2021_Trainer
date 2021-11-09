@@ -1,9 +1,12 @@
-﻿using Wifi.ConsoleTools.Misc;
+﻿using System;
+using Wifi.ConsoleTools.Misc;
 
 namespace Klassen_GL
 {
     class Mitarbeiter
     {
+        public Guid Id;
+
         public string Name;
 
         public Gender Geschlecht;
@@ -14,6 +17,13 @@ namespace Klassen_GL
             {
                 Name = newName;
             }
+        }
+
+        public void DisplayInfos()
+        {
+            Console.WriteLine($"    ID: [{Id}]");
+            Console.WriteLine($"  Name: {Name}");
+            Console.WriteLine($"Gender: {Geschlecht}");
         }
     }
 }
