@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Misc\Gender.cs" />
     <Compile Include="IsbnValidator.cs" />
     <Compile Include="UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
