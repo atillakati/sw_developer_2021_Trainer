@@ -6,11 +6,8 @@ namespace OOP_Grundlagen
     class Mitarbeiter
     {
         private Guid _id;
-
         private string _name;
-
         private Gender _geschlecht;
-
         private DateTime _birthday;
 
 
@@ -40,29 +37,6 @@ namespace OOP_Grundlagen
             _birthday = birthday;
         }
 
-        //Änderungs- und Zugriffsmethoden
-        //public string get_Name()
-        //{
-        //    return Name;
-        //}
-
-        //public Gender GetGeschlecht()
-        //{
-        //    return Geschlecht;
-        //}
-
-        //public Guid GetId()
-        //{
-        //    return Id;
-        //}
-
-        //public void SetId(Guid newId)
-        //{
-        //    if (newId != Guid.Empty)
-        //    {
-        //        Id = newId;
-        //    }
-        //}        
 
         public Guid Id
         {
@@ -74,7 +48,7 @@ namespace OOP_Grundlagen
             get
             {
                 return _name;
-            }            
+            }
         }
 
         public Gender Geschlecht
@@ -87,6 +61,7 @@ namespace OOP_Grundlagen
         {
             get { return DateTime.Now.Year - _birthday.Year; }
         }
+
 
         public void ChangeName(string newName)
         {
