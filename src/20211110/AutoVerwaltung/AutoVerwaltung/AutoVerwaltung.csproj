@@ -44,9 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auto.cs" />
+    <Compile Include="Fahrzeug.cs" />
     <Compile Include="EScooter.cs" />
+    <Compile Include="FuelType.cs" />
+    <Compile Include="PowerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Radio.cs" />
+    <Compile Include="Sportwagen.cs" />
     <Compile Include="VehicleType.cs" />
   </ItemGroup>
   <ItemGroup>

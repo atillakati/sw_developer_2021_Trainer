@@ -1,7 +1,7 @@
 ﻿
 namespace AutoVerwaltung
 {
-    public class EScooter : Auto
+    public class EScooter : Fahrzeug
     {
         private double _batKapacity;
 
