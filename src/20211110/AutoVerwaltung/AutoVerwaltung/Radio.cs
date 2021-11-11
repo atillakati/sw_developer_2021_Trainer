@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoVerwaltung
 {
-    public class Radio
+    class Radio
     {
         private string _bezeichnung;
         private PowerState _power;

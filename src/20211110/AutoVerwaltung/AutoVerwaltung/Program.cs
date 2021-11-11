@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace AutoVerwaltung
     {
         static void Main(string[] args)
         {
-            Fahrzeug[] myCars = new Fahrzeug[]
+            var myCars = new Fahrzeug[]
             {
                 new Auto("Manta Revision", VehicleType.Opel, 140, FuelType.Diesel),
                 new Sportwagen("Super Drift Car v1", VehicleType.Audi, 200, 480),
@@ -21,7 +22,17 @@ namespace AutoVerwaltung
 
             //int[] meineLottoZahlen = new int[] { 5, 8, 13, 22, 39, 40 };
 
-            DisplayCars(myCars);            
+            //DisplayCars(myCars);            
+
+            Fahrzeug aCar = myCars[0];
+
+            //aCar.SoundMachine.ChangePower(PowerState.On);
+            //aCar.SoundMachine.MakeSound();
+
+            var eineGanzeZahl = 0;
+            var meinFahrzeug = new EScooter("", VehicleType.Audi, 2, 2);
+
+            var analyseDaten = mbox.GetData();
         }
 
         private static void DisplayCars(Fahrzeug[] carsToDisplay)

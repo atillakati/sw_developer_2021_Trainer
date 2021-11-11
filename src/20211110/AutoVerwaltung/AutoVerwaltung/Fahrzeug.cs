@@ -6,7 +6,7 @@
         private int _maxSpeed;
         private string _bezeichnung;
         private VehicleType _marke;
-        
+        private Radio _soundMachine;        
 
         public Fahrzeug(string bezeichnung)
             : this(bezeichnung, VehicleType.BadMobil, 160)
@@ -16,12 +16,12 @@
         public Fahrzeug(string bezeichnung, VehicleType marke, int maxSpeed)
         {
             //Init(bezeichnung, marke, maxSpeed);
-
+            _soundMachine = new Radio(bezeichnung + "-Radio");
             _currentSpeed = 0;
             _maxSpeed = maxSpeed;
             _bezeichnung = bezeichnung;
             _marke = marke;
-        }      
+        }             
 
         public VehicleType Marke
         {
@@ -50,7 +50,10 @@
             get { return _currentSpeed; }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="delta"></param>
         public void SpeedUp(int delta)
         {
             if (delta + _currentSpeed <= _maxSpeed)
@@ -67,6 +70,16 @@
             return output;
         }
 
+
+        public void ChangeRadioState(PowerState newPowerState)
+        {
+            _soundMachine.ChangePower(newPowerState);
+        }
+
+        public void PlayMusik()
+        {
+            _soundMachine.MakeSound();
+        }
 
         private void Init(string bezeichnung, VehicleType marke, int maxSpeed)
         {
