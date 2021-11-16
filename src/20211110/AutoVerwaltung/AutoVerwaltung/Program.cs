@@ -32,7 +32,7 @@ namespace AutoVerwaltung
             var eineGanzeZahl = 0;
             var meinFahrzeug = new EScooter("", VehicleType.Audi, 2, 2);
 
-            var analyseDaten = mbox.GetData();
+            //var analyseDaten = mbox.GetData();
         }
 
         private static void DisplayCars(Fahrzeug[] carsToDisplay)
