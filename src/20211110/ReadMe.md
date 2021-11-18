@@ -5,3 +5,6 @@
 
 ## Vorschau Software Architektur (n-Tier)
 ![Vorschau Software Architektur](images/Architektur_GL.drawio.png)
+
+## Abstraktionen
+![Abstraktionen](images/AbstrakteClassen.drawio.png)
