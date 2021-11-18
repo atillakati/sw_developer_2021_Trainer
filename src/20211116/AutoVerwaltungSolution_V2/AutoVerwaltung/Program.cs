@@ -14,8 +14,10 @@ namespace AutoVerwaltung
                 new Auto("Tesla Model F", VehicleType.Tesla, 231, FuelType.Elektro),
                 new EScooter("SuperRoller v2", VehicleType.Segway, 25, 15.987),
                 new Sportwagen("KITT 2000", VehicleType.Opel, 180, 250)
-                
             };
+
+            //Fahrzeug[] myVehicles = DAL.LoadVehicels();
+
 
             //process them
             PowerOnMusicProvider(myVehicles);

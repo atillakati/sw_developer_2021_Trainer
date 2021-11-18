@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31903.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.UI", "Wifi.Autoverwaltung.UI\Wifi.Autoverwaltung.UI.csproj", "{06E77E01-F27E-49F7-8D4E-4C746443D2E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.VehicleTypes", "Wifi.Autoverwaltung.VehicleTypes\Wifi.Autoverwaltung.VehicleTypes.csproj", "{2ACF1359-07AA-4007-8AE4-069F8E7C1E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.Core", "Wifi.Autoverwaltung.Core\Wifi.Autoverwaltung.Core.csproj", "{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06E77E01-F27E-49F7-8D4E-4C746443D2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E77E01-F27E-49F7-8D4E-4C746443D2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E77E01-F27E-49F7-8D4E-4C746443D2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E77E01-F27E-49F7-8D4E-4C746443D2E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ACF1359-07AA-4007-8AE4-069F8E7C1E97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACF1359-07AA-4007-8AE4-069F8E7C1E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACF1359-07AA-4007-8AE4-069F8E7C1E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACF1359-07AA-4007-8AE4-069F8E7C1E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3371B426-7DDB-4707-B7FC-45059990E97C}
+	EndGlobalSection
+EndGlobal
