@@ -54,6 +54,10 @@
       <Project>{414feccd-f304-4c9f-9dde-0e3a23e92e32}</Project>
       <Name>Wifi.Autoverwaltung.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Wifi.Autoverwaltung.StorageTypes\Wifi.Autoverwaltung.StorageTypes.csproj">
+      <Project>{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}</Project>
+      <Name>Wifi.Autoverwaltung.StorageTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Wifi.Autoverwaltung.VehicleTypes\Wifi.Autoverwaltung.VehicleTypes.csproj">
       <Project>{2acf1359-07aa-4007-8ae4-069f8e7c1e97}</Project>
       <Name>Wifi.Autoverwaltung.VehicleTypes</Name>

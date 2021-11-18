@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.Vehicle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.Core", "Wifi.Autoverwaltung.Core\Wifi.Autoverwaltung.Core.csproj", "{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.Autoverwaltung.StorageTypes", "Wifi.Autoverwaltung.StorageTypes\Wifi.Autoverwaltung.StorageTypes.csproj", "{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{414FECCD-F304-4C9F-9DDE-0E3A23E92E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A46C30D-3950-4E07-8A72-0BB14A04DDAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

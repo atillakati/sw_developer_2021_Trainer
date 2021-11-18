@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wifi.Autoverwaltung.Core;
+using Wifi.Autoverwaltung.StorageTypes;
 using Wifi.Autoverwaltung.VehicleTypes;
 
 namespace Wifi.Autoverwaltung.UI
@@ -11,15 +12,28 @@ namespace Wifi.Autoverwaltung.UI
     internal class Program
     {
         static void Main(string[] args)
-        {
-            var myVehicleList = new Fahrzeug[]
-            {
-                new Auto("Supermobil V8", VehicleType.Audi, 250, FuelType.Benzin),
-                new Sportwagen("Henry 58", VehicleType.Opel, 150, 220),
-                new EScooter("Roller 0815", VehicleType.Xiaomi, 30, 38.5)
-            };
+        {            
+            string filename = string.Empty;
 
-            CreatePriceList(myVehicleList, TimeSpan.FromHours(12));
+            Console.Write("Bitte Dateiname mit Fahrzeugen eingeben: ");
+            filename = Console.ReadLine();
+
+            //storage objekt erzeugen
+            StorageBase storage = new DummyStorage();
+
+            var myVehicleList = storage.Read();
+            if (myVehicleList.Length > 0)
+            {
+                CreatePriceList(myVehicleList, TimeSpan.FromHours(12));
+            }
+
+            //hier sollen/können nun neue Fahrzeugtypen erfasst werden
+
+            var erg = storage.Write(myVehicleList);
+            if (erg)
+            {
+                Console.WriteLine($"Daten wurden in Datei '{storage.Filename}' gespeichert.");
+            }
         }
 
         private static void CreatePriceList(Fahrzeug[] vehicleList, TimeSpan duration)
