@@ -2,13 +2,13 @@
 
 namespace Wifi.Autoverwaltung.Core
 {
-    public abstract class Fahrzeug
+    public abstract class Fahrzeug : IVehicleType
     {
         private int _currentSpeed;
         private int _maxSpeed;
         private string _bezeichnung;
         private VehicleType _marke;
-        private readonly Radio _soundMachine;        
+        private readonly Radio _soundMachine;
 
         public Fahrzeug(string bezeichnung)
             : this(bezeichnung, VehicleType.BadMobil, 160)

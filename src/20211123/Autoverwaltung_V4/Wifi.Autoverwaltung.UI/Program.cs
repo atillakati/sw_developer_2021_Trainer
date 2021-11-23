@@ -19,8 +19,9 @@ namespace Wifi.Autoverwaltung.UI
             filename = Console.ReadLine();
 
             //storage objekt erzeugen
-            StorageBase storage = new DummyStorage();
+            IStorageBase storage = new DummyStorage();
 
+            
             var myVehicleList = storage.Read();
             if (myVehicleList.Length > 0)
             {
@@ -36,7 +37,7 @@ namespace Wifi.Autoverwaltung.UI
             }
         }
 
-        private static void CreatePriceList(Fahrzeug[] vehicleList, TimeSpan duration)
+        private static void CreatePriceList(IVehicleType[] vehicleList, TimeSpan duration)
         {
             Console.WriteLine("Preisliste:\n");
 
