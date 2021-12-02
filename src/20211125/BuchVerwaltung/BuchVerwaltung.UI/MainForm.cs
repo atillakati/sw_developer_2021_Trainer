@@ -1,5 +1,4 @@
-﻿using BuchVerwaltung.UI.StorageTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -10,16 +9,24 @@ namespace BuchVerwaltung.UI
         private List<IBook> _myBooks;
         private IStorage _storage;
 
-        public MainForm()
+        public MainForm(IStorage storage)
         {
             InitializeComponent();
-
-            //_storage = new JsonStorage();
-            _storage = new XmlStorage();
-
-
+            
+            _storage = storage;
             _myBooks = new List<IBook>();
         }
+
+        private void DisplayBookList(IEnumerable<IBook> booksToDisplay)
+        {
+            txt_bookListView.Text = string.Empty;
+
+            foreach (var book in booksToDisplay)
+            {
+                txt_bookListView.Text += book.Title + Environment.NewLine;
+            }
+        }
+
 
         private void ClearFormContents(object sender, EventArgs e)
         {
@@ -39,17 +46,7 @@ namespace BuchVerwaltung.UI
             ClearFormContents(null, null);
             DisplayBookList(_myBooks);
         }
-
-        private void DisplayBookList(IEnumerable<IBook> booksToDisplay)           
-        {
-            txt_bookListView.Text = string.Empty;
-
-            foreach (var book in booksToDisplay)
-            {
-                txt_bookListView.Text += book.Title + Environment.NewLine;
-            }
-        }
-
+        
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();

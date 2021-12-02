@@ -13,7 +13,28 @@ namespace BuchVerwaltung.UI.StorageTypes
     {
         public IEnumerable<IBook> Load(string filename)
         {
-            throw new NotImplementedException();
+            ItemListRoot root = null;
+            List<IBook> books = new List<IBook>();
+
+            using (var sr = new StreamReader(filename))
+            {
+                var serializer = new XmlSerializer(typeof(ItemListRoot));
+                root = serializer.Deserialize(sr) as ItemListRoot;
+            }
+            
+            if(root == null)
+            {
+                return new IBook[0];
+            }
+
+            foreach (var item in root.Item)
+            {
+                var book = new Book(item.Titel, item.Autor, 
+                                    item.Verlag, new DateTime(item.ErscheinungsJahr, 1, 1));
+                books.Add(book);
+            }
+
+            return books;
         }
 
         public bool Save(IEnumerable<IBook> dataToSave, string filename)
