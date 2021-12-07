@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Wifi.PlaylistEditor.Types.Test
 {
@@ -44,6 +45,20 @@ namespace Wifi.PlaylistEditor.Types.Test
 
             //Assert
             Assert.That(result, Is.EqualTo("Gandalf"));
+        }
+
+        [Test]
+        public void CreateDate_get()
+        {
+            //Arrange
+            var testDateTime = DateTime.Now;
+            _fixture = new Playlist("NoName", "Gandalf", testDateTime);
+
+            //Act
+            var result = _fixture.CreateDate;
+
+            //Assert
+            Assert.That(result, Is.EqualTo(testDateTime));
         }
     }
 }
