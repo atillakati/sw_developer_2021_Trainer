@@ -37,7 +37,7 @@ namespace Wifi.PlaylistEditor.Types
             get { return _author; }
         }
 
-        public DateTime CreateDate 
+        public DateTime CreateDate
         {
             get { return _createDate; }
         }
@@ -49,10 +49,10 @@ namespace Wifi.PlaylistEditor.Types
                 var duration = TimeSpan.Zero;
                 foreach (var item in _items)
                 {
-                    duration.Add(item.Duration);
+                    duration = duration.Add(item.Duration);
                 }
 
-                return duration;    
+                return duration;
             }
         }
 
@@ -65,6 +65,11 @@ namespace Wifi.PlaylistEditor.Types
 
         public void Add(IPlaylistItem newItem)
         {
+            if (newItem == null)
+            {
+                return;
+            }
+
             _items.Add(newItem);
         }
 
