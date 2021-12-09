@@ -18,10 +18,15 @@ namespace Wifi.PlaylistEditor.Repositories
         private const string NAME_COMMENT_KEY = "PLAYLIST-Name: ";
         private const string AUTHOR_COMMENT_KEY = "PLAYLIST-Autor: ";
         private const string CREATEDATE_COMMENT_KEY = "PLAYLIST-CreatedAt: ";
+        private IPlaylistItemFactory _itemFactory;
 
+        public M3uRepository(IPlaylistItemFactory itemFactory)
+        {
+            _itemFactory = itemFactory;
+        }
+
+        public string Extension => ".m3u";            
         
-        public string Extension => ".m3u";
-
         public string Description => "M3U Playlist Format";
 
 
@@ -87,10 +92,15 @@ namespace Wifi.PlaylistEditor.Repositories
             var autor = GetCommentValue<string>(comments, AUTHOR_COMMENT_KEY);
             var createDate = GetCommentValue<DateTime>(comments, CREATEDATE_COMMENT_KEY);
 
-            var playlist = new Playlist(name, autor, createDate);
+            var playlist = new Playlist(name, autor, createDate);            
             foreach (var m3uItem in m3uplaylist.PlaylistEntries)
             {
                 //var item = //Instanz einer IPlaylistItem Implementierung, aber welche?
+                var item = _itemFactory.Create(m3uItem.Path);
+                if(item != null)
+                {
+                    playlist.Add(item);
+                }
             }
 
             return playlist;

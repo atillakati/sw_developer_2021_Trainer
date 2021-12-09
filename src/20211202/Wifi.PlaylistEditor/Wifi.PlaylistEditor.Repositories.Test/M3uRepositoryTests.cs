@@ -17,7 +17,9 @@ namespace Wifi.PlaylistEditor.Repositories.Test
         [SetUp]
         public void Init()
         {
-            _fixture = new M3uRepository();
+            Mock<IPlaylistItemFactory> mockedPlaylistItemFactory = new Mock<IPlaylistItemFactory>();
+
+            _fixture = new M3uRepository(mockedPlaylistItemFactory.Object);
         }
 
 
