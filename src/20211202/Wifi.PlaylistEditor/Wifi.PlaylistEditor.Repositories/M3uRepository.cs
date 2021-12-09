@@ -14,6 +14,12 @@ namespace Wifi.PlaylistEditor.Repositories
     /// </summary>
     public class M3uRepository : IRepository
     {
+        private const string DATE_FORMAT_STRING = "yyyy-MM-dd";
+        private const string NAME_COMMENT_KEY = "PLAYLIST-Name: ";
+        private const string AUTHOR_COMMENT_KEY = "PLAYLIST-Autor: ";
+        private const string CREATEDATE_COMMENT_KEY = "PLAYLIST-CreatedAt: ";
+
+        
         public string Extension => ".m3u";
 
         public string Description => "M3U Playlist Format";
@@ -29,35 +35,21 @@ namespace Wifi.PlaylistEditor.Repositories
             }
 
             filePath = FixFilePathExtension(filePath);
-
+            
+            //read file content and create a entity object
             using (var stream = new StreamReader(filePath))
             {
                 contentString = stream.ReadToEnd();
             }
-
             var content = new M3uContent();
             var m3uplaylist = content.GetFromString(contentString);
-
-            //die Kommentare werden leider in einem Item abgelegt und nicht in der Playlist Ebene
-            var comments = m3uplaylist.PlaylistEntries.SelectMany(e => e.Comments);
-            if (!comments.Any())
-            {
-                return null;
-            }
-
-            var name = GetCommentValue<string>(comments, "Name: ");
-            var autor = GetCommentValue<string>(comments, "Autor: ");
-            var createDate = GetCommentValue<DateTime>(comments, "CreateDate: ");
-
-            var playlist = new Playlist(name, autor, createDate);
-            foreach (var m3uItem in m3uplaylist.PlaylistEntries)
-            {
-                //var item = //Instanz einer IPlaylistItem Implementierung, aber welche?
-            }
+            
+            //convert
+            IPlaylist playlist = MapToDomain(m3uplaylist);
 
             return playlist;
-        }
-      
+        }        
+
         public bool Save(IPlaylist playlist, string filePath)
         {
             if (playlist == null || string.IsNullOrEmpty(filePath))
@@ -67,12 +59,51 @@ namespace Wifi.PlaylistEditor.Repositories
 
             filePath = FixFilePathExtension(filePath);
 
+            //convert
+            M3uPlaylist m3uplaylist = MapToEntity(playlist);
+
+            //create filecontent and write
+            var content = new M3uContent();
+            var stringContent = content.ToText(m3uplaylist);
+
+            using (var sw = new StreamWriter(filePath, false))
+            {
+                sw.WriteLine(stringContent);
+            }
+
+            return true;
+        }
+
+        private IPlaylist MapToDomain(M3uPlaylist m3uplaylist)
+        {
+            //die Kommentare werden leider in einem Item abgelegt und nicht in der Playlist Ebene
+            var comments = m3uplaylist.PlaylistEntries.SelectMany(e => e.Comments);
+            if (!comments.Any())
+            {
+                return null;
+            }
+
+            var name = GetCommentValue<string>(comments, NAME_COMMENT_KEY);
+            var autor = GetCommentValue<string>(comments, AUTHOR_COMMENT_KEY);
+            var createDate = GetCommentValue<DateTime>(comments, CREATEDATE_COMMENT_KEY);
+
+            var playlist = new Playlist(name, autor, createDate);
+            foreach (var m3uItem in m3uplaylist.PlaylistEntries)
+            {
+                //var item = //Instanz einer IPlaylistItem Implementierung, aber welche?
+            }
+
+            return playlist;
+        }
+
+        private static M3uPlaylist MapToEntity(IPlaylist playlist)
+        {
             var m3uplaylist = new M3uPlaylist();
             m3uplaylist.IsExtended = true;
 
-            m3uplaylist.Comments.Add($"Autor: {playlist.Author}");
-            m3uplaylist.Comments.Add($"Name: {playlist.Name}");
-            m3uplaylist.Comments.Add($"CreateDate: {playlist.CreateDate.ToString("yyyy-MM-dd")}");
+            m3uplaylist.Comments.Add($"{AUTHOR_COMMENT_KEY}{playlist.Author}");
+            m3uplaylist.Comments.Add($"{NAME_COMMENT_KEY}{playlist.Name}");
+            m3uplaylist.Comments.Add($"{CREATEDATE_COMMENT_KEY}{playlist.CreateDate.ToString(DATE_FORMAT_STRING)}");
 
             foreach (var item in playlist.Items)
             {
@@ -87,17 +118,8 @@ namespace Wifi.PlaylistEditor.Repositories
                 m3uplaylist.PlaylistEntries.Add(newM3uItem);
             }
 
-            var content = new M3uContent();
-            var stringContent = content.ToText(m3uplaylist);
-
-            using (var sw = new StreamWriter(filePath, false))
-            {
-                sw.WriteLine(stringContent);
-            }
-
-            return true;
+            return m3uplaylist;
         }
-
 
         private string FixFilePathExtension(string filePath)
         {
@@ -132,7 +154,7 @@ namespace Wifi.PlaylistEditor.Repositories
                         break;
 
                     case "DateTime":
-                        var convertedValue = DateTime.ParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        var convertedValue = DateTime.ParseExact(value, DATE_FORMAT_STRING, CultureInfo.InvariantCulture);
                         result = (T)Convert.ChangeType(convertedValue, typeof(T));
                         break;
                 }
