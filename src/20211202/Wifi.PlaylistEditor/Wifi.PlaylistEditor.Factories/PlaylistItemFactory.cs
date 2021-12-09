@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wifi.PlaylistEditor.Items;
 using Wifi.PlaylistEditor.Types;
 
 namespace Wifi.PlaylistEditor.Factories
@@ -23,7 +24,7 @@ namespace Wifi.PlaylistEditor.Factories
             switch (extension)
             {
                 case ".mp3":
-                    //playlistItem = //create instance of....
+                    playlistItem = new Mp3Item(filePath);
                     break;
 
                 case ".jpg":
