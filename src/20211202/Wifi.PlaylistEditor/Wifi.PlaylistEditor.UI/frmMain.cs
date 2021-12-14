@@ -16,8 +16,10 @@ namespace Wifi.PlaylistEditor.UI
         private INewPlaylistCreator _newPlaylistCreator;
         private IPlaylist _playlist;
         private IPlaylistItemFactory _itemFactory;
+        private IRepositoryFactory _repositoryFactory;
 
-        public frmMain(IPlaylistItemFactory itemFactory)
+        public frmMain(IPlaylistItemFactory itemFactory,
+                       IRepositoryFactory repositoryFactory)
         {
             InitializeComponent();
 
@@ -25,18 +27,21 @@ namespace Wifi.PlaylistEditor.UI
             //_newPlaylistCreator = new DummyNewPlaylistCreator();
             _newPlaylistCreator = new frmNewPlaylist();
             _itemFactory = itemFactory;
+            _repositoryFactory = repositoryFactory;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(_newPlaylistCreator.OpenDialog() != DialogResult.OK)
+            if (_newPlaylistCreator.OpenDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            _playlist = new Playlist(_newPlaylistCreator.Title, 
-                                     _newPlaylistCreator.Author, 
+            _playlist = new Playlist(_newPlaylistCreator.Title,
+                                     _newPlaylistCreator.Author,
                                      _newPlaylistCreator.CreatedAt);
+            
+            EnablePlaylistControls(true);
             UpdateView();
         }
 
@@ -63,7 +68,8 @@ namespace Wifi.PlaylistEditor.UI
                 imageList1.Images.Add(playlistItem.Thumbnail);
 
                 listViewItem.ImageIndex = index;
-                
+                listViewItem.Tag = playlistItem;
+
                 lv_itemView.Items.Add(listViewItem);
                 index++;
             }
@@ -72,6 +78,14 @@ namespace Wifi.PlaylistEditor.UI
         private void frmMain_Load(object sender, EventArgs e)
         {
             ClearView();
+            EnablePlaylistControls(false);
+        }
+
+        private void EnablePlaylistControls(bool isEnabled)
+        {
+            lv_itemView.Enabled = isEnabled;
+            itemsToolStripMenuItem.Enabled = isEnabled;
+            saveToolStripMenuItem.Enabled = isEnabled;
         }
 
         private void ClearView()
@@ -83,7 +97,7 @@ namespace Wifi.PlaylistEditor.UI
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() != DialogResult.OK) 
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
@@ -98,6 +112,46 @@ namespace Wifi.PlaylistEditor.UI
             }
 
             UpdateView();
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lv_itemView.SelectedItems == null || lv_itemView.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            foreach (ListViewItem selectedItem in lv_itemView.SelectedItems)
+            {
+                var playlistItem = selectedItem.Tag as IPlaylistItem;
+
+                if (playlistItem != null)
+                {
+                    _playlist.Remove(playlistItem);
+                }
+            }
+
+            UpdateView();
+        }
+
+        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _playlist.Clear();
+            UpdateView();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK) 
+            { 
+                return ;
+            }
+
+            IRepository repository = _repositoryFactory.Create(saveFileDialog1.FileName);
+            if (repository != null)
+            {
+                repository.Save(_playlist, saveFileDialog1.FileName);
+            }
         }
     }
 }

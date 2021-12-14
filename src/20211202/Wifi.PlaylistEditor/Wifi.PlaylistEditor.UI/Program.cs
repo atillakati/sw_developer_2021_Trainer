@@ -16,10 +16,11 @@ namespace Wifi.PlaylistEditor.UI
         static void Main()
         {
             var itemFactory = new PlaylistItemFactory();
+            var repositoryFactory = new RepositoryFactory(itemFactory);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain(itemFactory));
+            Application.Run(new frmMain(itemFactory, repositoryFactory));
         }
     }
 }
