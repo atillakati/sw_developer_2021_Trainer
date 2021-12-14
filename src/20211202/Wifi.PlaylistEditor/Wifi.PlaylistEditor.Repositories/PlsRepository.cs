@@ -79,6 +79,7 @@ namespace Wifi.PlaylistEditor.Repositories
             return true;
         }
 
+
         private IPlaylist MapToDomain(PlsPlaylist plsPlaylist, string fileName)
         {            
             var playlist = new Playlist(Path.GetFileNameWithoutExtension(fileName), "Wifi-PlaylistEditor");            

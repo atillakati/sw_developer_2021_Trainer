@@ -28,32 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btt_cancel = new System.Windows.Forms.Button();
+            this.btt_ok = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_titel = new System.Windows.Forms.TextBox();
+            this.txt_autor = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // btt_cancel
             // 
-            this.button1.Location = new System.Drawing.Point(204, 147);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Abbruch";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btt_cancel.Location = new System.Drawing.Point(204, 147);
+            this.btt_cancel.Name = "btt_cancel";
+            this.btt_cancel.Size = new System.Drawing.Size(75, 23);
+            this.btt_cancel.TabIndex = 0;
+            this.btt_cancel.Text = "Abbruch";
+            this.btt_cancel.UseVisualStyleBackColor = true;
+            this.btt_cancel.Click += new System.EventHandler(this.btt_cancel_Click);
             // 
-            // button2
+            // btt_ok
             // 
-            this.button2.Location = new System.Drawing.Point(292, 147);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "OK";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btt_ok.Location = new System.Drawing.Point(292, 147);
+            this.btt_ok.Name = "btt_ok";
+            this.btt_ok.Size = new System.Drawing.Size(75, 23);
+            this.btt_ok.TabIndex = 1;
+            this.btt_ok.Text = "OK";
+            this.btt_ok.UseVisualStyleBackColor = true;
+            this.btt_ok.Click += new System.EventHandler(this.btt_ok_Click);
             // 
             // label1
             // 
@@ -73,33 +75,35 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Autor:";
             // 
-            // textBox1
+            // txt_titel
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(267, 20);
-            this.textBox1.TabIndex = 4;
+            this.txt_titel.Location = new System.Drawing.Point(100, 52);
+            this.txt_titel.Name = "txt_titel";
+            this.txt_titel.Size = new System.Drawing.Size(267, 20);
+            this.txt_titel.TabIndex = 4;
             // 
-            // textBox2
+            // txt_autor
             // 
-            this.textBox2.Location = new System.Drawing.Point(100, 96);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(267, 20);
-            this.textBox2.TabIndex = 5;
+            this.txt_autor.Location = new System.Drawing.Point(100, 96);
+            this.txt_autor.Name = "txt_autor";
+            this.txt_autor.Size = new System.Drawing.Size(267, 20);
+            this.txt_autor.TabIndex = 5;
             // 
             // frmNewPlaylist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btt_cancel;
             this.ClientSize = new System.Drawing.Size(415, 198);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_autor);
+            this.Controls.Add(this.txt_titel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btt_ok);
+            this.Controls.Add(this.btt_cancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmNewPlaylist";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Neue Playlist erzeugen";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -108,11 +112,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btt_cancel;
+        private System.Windows.Forms.Button btt_ok;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_titel;
+        private System.Windows.Forms.TextBox txt_autor;
     }
 }
