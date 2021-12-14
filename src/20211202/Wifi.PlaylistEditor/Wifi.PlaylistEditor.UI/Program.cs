@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Wifi.PlaylistEditor.Factories;
 
 namespace Wifi.PlaylistEditor.UI
 {
@@ -14,9 +15,11 @@ namespace Wifi.PlaylistEditor.UI
         [STAThread]
         static void Main()
         {
+            var itemFactory = new PlaylistItemFactory();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new frmMain(itemFactory));
         }
     }
 }

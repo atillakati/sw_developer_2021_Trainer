@@ -15,14 +15,16 @@ namespace Wifi.PlaylistEditor.UI
     {
         private INewPlaylistCreator _newPlaylistCreator;
         private IPlaylist _playlist;
+        private IPlaylistItemFactory _itemFactory;
 
-        public frmMain()
+        public frmMain(IPlaylistItemFactory itemFactory)
         {
             InitializeComponent();
 
-            //Erzeugungsabhängigkeit!!! BÖSE!
+            //Erzeugungsabhängigkeiten!!! BÖSE!
             //_newPlaylistCreator = new DummyNewPlaylistCreator();
             _newPlaylistCreator = new frmNewPlaylist();
+            _itemFactory = itemFactory;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,9 +43,30 @@ namespace Wifi.PlaylistEditor.UI
         private void UpdateView()
         {
             lbl_autor.Text = $"Autor: {_playlist.Author} Created at: {_playlist.CreateDate}";
-            lbl_title.Text = $"{_playlist.Name} [{_playlist.Duration}]"; 
-            
+            lbl_title.Text = $"{_playlist.Name} [{_playlist.Duration}]";
+
             //ToDo: display the items here!!!
+            UpdateListViewItems();
+        }
+
+        private void UpdateListViewItems()
+        {
+            int index = 0;
+
+            lv_itemView.Items.Clear();
+            imageList1.Images.Clear();
+            lv_itemView.LargeImageList = imageList1;
+
+            foreach (var playlistItem in _playlist.Items)
+            {
+                var listViewItem = new ListViewItem(playlistItem.Title);
+                imageList1.Images.Add(playlistItem.Thumbnail);
+
+                listViewItem.ImageIndex = index;
+                
+                lv_itemView.Items.Add(listViewItem);
+                index++;
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -56,6 +79,25 @@ namespace Wifi.PlaylistEditor.UI
             lbl_autor.Text = string.Empty;
             lbl_title.Text = string.Empty;
             lbl_itemInfo.Text = string.Empty;
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) 
+            {
+                return;
+            }
+
+            foreach (var file in openFileDialog1.FileNames)
+            {
+                var newItem = _itemFactory.Create(file);
+                if (newItem != null)
+                {
+                    _playlist.Add(newItem);
+                }
+            }
+
+            UpdateView();
         }
     }
 }
