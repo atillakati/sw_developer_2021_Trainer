@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Wifi.PlaylistEditor.Types;
+using Wifi.PlaylistEditor.UI.Properties;
 
 namespace Wifi.PlaylistEditor.UI
 {
@@ -65,7 +66,14 @@ namespace Wifi.PlaylistEditor.UI
             foreach (var playlistItem in _playlist.Items)
             {
                 var listViewItem = new ListViewItem(playlistItem.Title);
-                imageList1.Images.Add(playlistItem.Thumbnail);
+                if (playlistItem.Thumbnail != null)
+                {
+                    imageList1.Images.Add(playlistItem.Thumbnail);
+                }
+                else
+                {
+                    imageList1.Images.Add(Resources.noimage);
+                }
 
                 listViewItem.ImageIndex = index;
                 listViewItem.Tag = playlistItem;
@@ -97,6 +105,9 @@ namespace Wifi.PlaylistEditor.UI
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ConfigureFileDialog(openFileDialog1, "Bitte Item auswählen:", true,
+                _itemFactory.AvailableTypes);
+
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -112,6 +123,12 @@ namespace Wifi.PlaylistEditor.UI
             }
 
             UpdateView();
+        }
+
+        private void ConfigureFileDialog(FileDialog fileDialog, string dialogTitle, 
+                                         bool enableMultiSelection, IEnumerable<IFileIdentifier> availableTypes)
+        {
+            throw new NotImplementedException();
         }
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,6 +169,25 @@ namespace Wifi.PlaylistEditor.UI
             {
                 repository.Save(_playlist, saveFileDialog1.FileName);
             }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var repository = _repositoryFactory.Create(openFileDialog1.FileName);
+            if(repository == null)
+            {
+                //nicht unterstütztes Dateiformat!!!!
+                return;
+            }
+
+            _playlist = repository.Load(openFileDialog1.FileName);
+            EnablePlaylistControls(true);
+            UpdateView();            
         }
     }
 }

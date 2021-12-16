@@ -18,28 +18,22 @@ namespace Wifi.PlaylistEditor.Factories
             _playlistItemFactory = playlistItemFactory;
         }
 
+        public IEnumerable<IFileIdentifier> AvailableTypes => new IFileIdentifier[]
+        {
+            new M3uRepository(_playlistItemFactory),
+            new PlsRepository(_playlistItemFactory)
+        };
+
         public IRepository Create(string fileName)
         {
-            IRepository repository = null;
-
             if (string.IsNullOrEmpty(fileName))
             {
                 return null;
             }
 
             var extension = Path.GetExtension(fileName);
-            switch (extension)
-            {
-                case ".m3u":
-                    repository = new M3uRepository(_playlistItemFactory);
-                    break;
 
-                case ".pls":
-                    repository = new PlsRepository(_playlistItemFactory);
-                    break;                
-            }
-
-            return repository;
+            return (IRepository)AvailableTypes.FirstOrDefault(x => x.Extension == extension);            
         }
     }
 }

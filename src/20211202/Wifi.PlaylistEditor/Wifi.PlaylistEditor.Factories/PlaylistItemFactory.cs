@@ -11,6 +11,13 @@ namespace Wifi.PlaylistEditor.Factories
 {
     public class PlaylistItemFactory : IPlaylistItemFactory
     {
+        public IEnumerable<IFileIdentifier> AvailableTypes => new IFileIdentifier[] 
+        { 
+            new Mp3Item(string.Empty) ,
+            //...
+            //..
+        };
+
         public IPlaylistItem Create(string filePath)
         {
             IPlaylistItem playlistItem = null;
