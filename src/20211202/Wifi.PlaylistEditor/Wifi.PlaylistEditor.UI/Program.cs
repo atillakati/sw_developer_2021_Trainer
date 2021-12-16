@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 using Wifi.PlaylistEditor.Factories;
+using Wifi.PlaylistEditor.Types;
 
 namespace Wifi.PlaylistEditor.UI
 {
@@ -15,12 +17,18 @@ namespace Wifi.PlaylistEditor.UI
         [STAThread]
         static void Main()
         {
-            var itemFactory = new PlaylistItemFactory();
-            var repositoryFactory = new RepositoryFactory(itemFactory);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain(itemFactory, repositoryFactory));
+
+            var container = new UnityContainer();
+
+            container.RegisterType<IRepositoryFactory, RepositoryFactory>();
+            container.RegisterType<IPlaylistItemFactory, PlaylistItemFactory>();
+            container.RegisterType<INewPlaylistCreator, frmNewPlaylist>();
+
+            var mainForm = container.Resolve<frmMain>();
+            
+            Application.Run(mainForm);
         }
     }
 }

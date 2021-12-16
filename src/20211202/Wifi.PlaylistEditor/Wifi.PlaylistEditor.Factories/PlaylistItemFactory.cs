@@ -14,6 +14,7 @@ namespace Wifi.PlaylistEditor.Factories
         public IEnumerable<IFileIdentifier> AvailableTypes => new IFileIdentifier[] 
         { 
             new Mp3Item(string.Empty) ,
+            new ImageItem(),
             //...
             //..
         };
@@ -35,7 +36,7 @@ namespace Wifi.PlaylistEditor.Factories
                     break;
 
                 case ".jpg":
-                    //playlistItem = //create instance of....
+                    playlistItem = new ImageItem(filePath);
                     break;
             }
 

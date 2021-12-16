@@ -13,22 +13,21 @@ using Wifi.PlaylistEditor.UI.Properties;
 namespace Wifi.PlaylistEditor.UI
 {
     public partial class frmMain : Form
-    {
-        private INewPlaylistCreator _newPlaylistCreator;
+    {        
         private IPlaylist _playlist;
         private IPlaylistItemFactory _itemFactory;
         private IRepositoryFactory _repositoryFactory;
+        private readonly INewPlaylistCreator _newPlaylistCreator;
 
         public frmMain(IPlaylistItemFactory itemFactory,
-                       IRepositoryFactory repositoryFactory)
+                       IRepositoryFactory repositoryFactory,
+                       INewPlaylistCreator newPlaylistCreator)
         {
             InitializeComponent();
-
-            //Erzeugungsabhängigkeiten!!! BÖSE!
-            //_newPlaylistCreator = new DummyNewPlaylistCreator();
-            _newPlaylistCreator = new frmNewPlaylist();
+              
             _itemFactory = itemFactory;
             _repositoryFactory = repositoryFactory;
+            _newPlaylistCreator = newPlaylistCreator;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,9 +125,22 @@ namespace Wifi.PlaylistEditor.UI
         }
 
         private void ConfigureFileDialog(FileDialog fileDialog, string dialogTitle, 
-                                         bool enableMultiSelection, IEnumerable<IFileIdentifier> availableTypes)
+                                         bool enableMultiSelection,
+                                         IEnumerable<IFileIdentifier> availableTypes)
         {
-            throw new NotImplementedException();
+            fileDialog.Title = dialogTitle;
+            
+            if(fileDialog is OpenFileDialog openFileDialog)
+            {
+                openFileDialog.Multiselect = enableMultiSelection;
+            }
+
+            var filterString = string.Empty;
+            availableTypes.ToList().ForEach(x => filterString += $"{x.Description}|*{x.Extension}|");
+            filterString = filterString.Remove(filterString.Length - 1, 1);
+
+            fileDialog.Filter = filterString;
+            fileDialog.FileName = string.Empty;
         }
 
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,6 +171,9 @@ namespace Wifi.PlaylistEditor.UI
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ConfigureFileDialog(saveFileDialog1, "Name für Playlist wählen", false,
+                _repositoryFactory.AvailableTypes);
+
             if (saveFileDialog1.ShowDialog() != DialogResult.OK) 
             { 
                 return ;
@@ -173,6 +188,9 @@ namespace Wifi.PlaylistEditor.UI
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ConfigureFileDialog(openFileDialog1, "Playlist auswählen", false,
+                _repositoryFactory.AvailableTypes);
+
             if(openFileDialog1.ShowDialog() != DialogResult.OK)
             {
                 return;

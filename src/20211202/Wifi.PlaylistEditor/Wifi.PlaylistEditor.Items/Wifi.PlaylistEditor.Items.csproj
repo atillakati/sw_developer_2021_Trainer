@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageItem.cs" />
     <Compile Include="Mp3Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
